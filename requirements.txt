@@ -51,7 +51,6 @@ lxml==4.4.1
 Markdown==3.1.1
 MarkupSafe==1.1.1
 matplotlib==3.1.1
-mkl-random==1.1.0
 mkl-service==2.3.0
 mock==3.0.5
 MouseInfo==0.0.4
