@@ -11,7 +11,7 @@ from . import Model
 def index(request):
 
     if request.method=="GET":
-        return HttpResponse("Hello worls")
+        return JsonResponse({"content":"Hello worls"})
 
     if request.method=="POST":
         image_data = json.loads(request.body)['content']
