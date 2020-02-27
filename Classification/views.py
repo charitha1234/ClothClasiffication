@@ -9,6 +9,9 @@ from . import ColorDetect
 @api_view(["POST","GET"])
 def index(request):
 
+    if request.method=="GET":
+        return HttpResponse("Hello world")
+
     if request.method=="POST":
         image_data = json.loads(request.body)['content']
         format, imgstr = image_data.split(';base64,')
@@ -37,3 +40,4 @@ def index(request):
             ]
         }
         return JsonResponse(Content)
+    
