@@ -5,6 +5,7 @@ import json
 from django.core.files.base import ContentFile
 from rest_framework.decorators import api_view
 from django.core.files.storage import default_storage
+from . import ColorDetect
 @api_view(["POST","GET"])
 def index(request):
 
@@ -19,6 +20,7 @@ def index(request):
         file_name = "myphoto." + ext
         path = default_storage.save(file_name, data)
         print(file_name)
+        ColorDetect.colorDetection(path)
         Content={
             "pattern":0,
             "polka":False,
