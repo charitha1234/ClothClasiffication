@@ -1,1 +1,1 @@
-'web: gunicorn ClothClassificationBackend.wsgi --log-file -' 
+web: gunicorn ClothClassificationBackend.wsgi --log-file -
