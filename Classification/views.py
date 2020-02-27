@@ -6,11 +6,12 @@ from django.core.files.base import ContentFile
 from rest_framework.decorators import api_view
 from django.core.files.storage import default_storage
 from . import ColorDetect
+from . import Model
 @api_view(["POST","GET"])
 def index(request):
 
     if request.method=="GET":
-        return HttpResponse("Hello world")
+        return HttpResponse("Hello worls")
 
     if request.method=="POST":
         image_data = json.loads(request.body)['content']
@@ -19,10 +20,11 @@ def index(request):
         data = ContentFile(base64.b64decode(imgstr))  
         file_name = "myphoto." + ext
         path = default_storage.save(file_name, data)
-        print(file_name)
         ColorDetect.colorDetection(path)
+        Class=Model.predict(path).tolist()[0]
+        print(Class)
         Content={
-            "pattern":0,
+            "pattern":Class,
             "polka":False,
             "floral":False,
             "colors":[
