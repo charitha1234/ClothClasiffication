@@ -15,10 +15,11 @@ def index(request):
 
     if request.method=="POST":
         image_data = json.loads(request.body)['content']
-        format, imgstr = image_data.split(';base64,')
-        ext = format.split('/')[-1]
-        data = ContentFile(base64.b64decode(imgstr))  
-        file_name = "myphoto." + ext
+        # format, imgstr = image_data.split(';base64,')
+        # ext = format.split('/')[-1]
+        print(image_data)
+        data = ContentFile(base64.b64decode(image_data))  
+        file_name = "myphoto.jpg"
         path = default_storage.save(file_name, data)
         ColorDetect.colorDetection(path)
         Class=Model.predict(path).tolist()[0]
