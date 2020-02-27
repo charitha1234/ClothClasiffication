@@ -53,7 +53,7 @@ msgpack==0.6.1
 nbconvert==5.6.0
 nbformat==4.4.0
 networkx==2.3
-cv2
+cv2==3.4.2
 notebook==6.0.1
 numpy==1.16.5
 olefile==0.46
