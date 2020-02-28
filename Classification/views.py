@@ -21,26 +21,20 @@ def index(request):
         data = ContentFile(base64.b64decode(image_data))  
         file_name = "myphoto.jpg"
         path = default_storage.save(file_name, data)
-        ColorDetect.colorDetection(path)
-        Class=Model.predict(path).tolist()[0]
-        print(Class)
-        Content={
-            "pattern":Class,
-            "polka":False,
-            "floral":False,
-            "colors":[
-                {
-                    "color":"green",
-                    "percentage":50,
-                    "shades":"dark green",
-
-                },
-                {
-                    "color":"red",
-                    "percentage":20,
-                    "shades":"carrot"
-                }
-            ]
-        }
-        return JsonResponse(Content)
+        outputColors=ColorDetect.colorDetection(path)
+        Class1,Class2=Model.predict(path)
+        if Class2=="":
+            Content={
+                "pattern":Class1,
+                "secondry_pattern":False,
+                "colors":outputColors["Maincolors"]
+            }
+            return JsonResponse(Content)
+        else:
+            Content={
+                "pattern":Class1,
+                "secondry_pattern":Class2,
+                "colors":outputColors["Maincolors"]
+            }
+            return JsonResponse(Content)
     
